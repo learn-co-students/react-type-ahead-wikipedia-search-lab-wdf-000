@@ -7,7 +7,11 @@ class Store {
   }
 
   addListener(listener) {
-    // TODO
+    this.listeners.push(listener);
+    const removeListener = () => {
+      this.listeners = this.listeners.filter((l) => listener !== l);
+    };
+    return removeListener;
   }
 
   setState(state) {
@@ -21,5 +25,6 @@ class Store {
     return this.state;
   }
 }
+
 
 module.exports = Store;

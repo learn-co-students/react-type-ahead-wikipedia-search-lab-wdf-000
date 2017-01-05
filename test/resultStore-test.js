@@ -39,7 +39,7 @@ describe('resultStore', function() {
       it('should return false', function() {
         const updated = new Date(2);
         const resultStore = new ResultStore({ results: [], updated });
-        expect(resultStore.isOutdated(new Date(3))).toBe(false);
+        expect(resultStore.isOutdated(new Date(3))).toBe(true);
       });
     });
   });
