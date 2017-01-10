@@ -16,7 +16,7 @@ describe('<Autocomplete />', function() {
 
   beforeEach(function() {
     sandbox.stub(resultStore, 'addListener');
-  });
+  }); mocha
 
   afterEach(function() {
     sandbox.restore();
@@ -33,10 +33,15 @@ describe('<Autocomplete />', function() {
   describe('when resultStore updates', function() {
     it('should update .results state', function() {
       const wrapper = mount(<Autocomplete />);
+      //wrapper is equal to the autocomplete component once its mounted
       const listener = resultStore.addListener.getCall(0).args[0];
+      //const listener is equal to add listeners firs listener component
       const results = ['query', [], [], []];
+      //const result is equal to the state results which consists of the three empty arrays and the new query
       listener({ results });
+
       expect(wrapper.state('results')).toBe(results);
+      //Im going to make sure when the store is updateing the state
     });
   });
 
