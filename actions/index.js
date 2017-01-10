@@ -4,14 +4,17 @@ const jsonp = require('jsonp');
 const resultStore = require('../stores/resultStore');
 const wikipedia = require('../utils/wikipedia');
 
-const search = (query) => {
-  const requested = new Date();
 
-  // function dataHash(data){
-  //   var slate = [{title: data[1][0], description: data[1][1]}, {title: data[2][0], description: data[2][1]}]
-  //   resultStore.setState(slate)
-  //   return slate
-  // }
+const search = (query) => {
+  const requested = new Date()
+  return wikipedia.search(query).then((data) => {
+    if(!resultStore.isOutdated(requested)){
+      dataHash(data, requested)
+    }
+  });
+};
+
+
   function dataHash(data, requested){
    var titles = data[1];
    var descriptions = data[2];
@@ -30,16 +33,6 @@ const search = (query) => {
      updated: requested,
   });
 }
-
-
-  return wikipedia.search(query).then((data) => {
-    // dataHash(data)
-    // resultStore.isOutdated(requested)
-    if(!resultStore.isOutdated(requested)){
-      dataHash(data, requested)
-    }
-  });
-};
 
 
 

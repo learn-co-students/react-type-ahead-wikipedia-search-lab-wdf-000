@@ -6,7 +6,6 @@ class SearchResults extends React.Component{
 
   render(){
     const result = this.props.results
-    debugger;
     const results = result ? result.map((res) =>
       <li><p>{res.description}</p>
         <a href={res.link}>{res.title}</a>

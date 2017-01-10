@@ -18,36 +18,27 @@ class Autocomplete extends React.Component {
   }
 
 
-  // componentWillmount(){
-  //   this.setState({
-  //     results: [[], [], []],
-  //     query: ""
-  //   })
-  // }
-
-
   componentDidMount(){
-    this.removeListener = resultStore.addListener((state) => {
-      this.setState({results: state})
-    });
-    this.setState({results: resultStore.getState()})
-  }
-
+    this.removeListener = resultStore.addListener(({results: results, query: query}) => {
+      this.setState({
+        results: results,
+        query: query
+      })
+    }
+  )}
 
   componentWillUnmount(){
     this.removeListener();
   }
 
 
-  handleQueryChange(event){
-  this.setState({
-    query: event.target.value
-  })
-
-  if(event.target.value.length > 2){
-    actions.search(event.target.value)
-  }
-
+  handleQueryChange(ev){
+    this.setState({
+      query: ev.target.value
+    })
+    if(ev.target.value.length > 2){
+      actions.search(ev.target.value)
+    }
   }
 
   render() {
