@@ -6,9 +6,17 @@ class Store {
     this.listeners = [];
   }
 
-  addListener(listener) {
-    // TODO
+
+
+  addListener(listener){
+  this.listeners.push(listener);
+  const removeListener = () => {
+      const index = this.listeners.indexOf(listener)
+      this.listeners.splice(index, 1)
+    }
+    return removeListener
   }
+
 
   setState(state) {
     this.state = state;
